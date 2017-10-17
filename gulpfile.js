@@ -17,11 +17,13 @@ let options = {
 };
 
 
-let gulp = require('gulp');
-let sass = require('gulp-sass');
-let cleanCSS = require('gulp-clean-css');
+let gulp = require("gulp");
+let sass = require("gulp-sass");
+let cleanCSS = require("gulp-clean-css");
 let rename = require("gulp-rename");
 let nodemon = require("gulp-nodemon");
+let ts = require("gulp-typescript");
+let tsProject = ts.createProject("./tsconfig.json");
 
 gulp.task('sass', function () {
     let options2 = {...options};
@@ -46,3 +48,9 @@ gulp.task("nodemon", function () {
 });
 
 gulp.task("default", ["sass:watch", "nodemon"]);
+
+gulp.task("tsc", function () {
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe(gulp.dest("bin"));
+});

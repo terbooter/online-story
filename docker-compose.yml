@@ -1,0 +1,10 @@
+node:
+  build: .
+  ports:
+    - "99:99"
+  volumes:
+    - ./public:/container/public
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50m"
+    max-file: "100"
