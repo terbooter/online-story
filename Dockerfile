@@ -19,7 +19,7 @@ ADD ./scss /container/scss
 
 RUN npm install
 
-RUN gulp tsc
 RUN gulp sass
+RUN gulp tsc
 
 CMD ["node", "/container/bin/index.js"]
