@@ -1,0 +1,102 @@
+// Независимый модуль
+// Генерит адаптивную сетку для трех размеров экранов
+//
+// Вся сетка описывается с помощью 3 типов CSS классов:
+// container
+// row
+// col-[size]-[width]
+//
+
+$grid-columns: 12;
+$gutter: 5px;
+
+// Оборочивает контент медиазапросом для маленьких экранов
+// Миксин имеет понятное "говорящее" название.
+// Подробнее тут
+// http://css-live.ru/articles-css/pravilnye-kontrolnye-tochki-v-css.html
+@mixin for-small {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
+@mixin for-medium {
+    @media (min-width: 600px) and (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin for-large {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+// Тут все понятно.
+// Создаем нужное количество классов колонок
+// И вычисляем ширину
+@mixin generate-columns($screen-size) {
+    @for $i from 1 through $grid-columns {
+        .col-#{$screen-size}-#{$i} {
+            width: 100% / $grid-columns * $i;
+        }
+    }
+}
+
+@mixin generate-grid-classes {
+    // Выводим колонки для каждого медиазапроса
+    @include for-small {
+        @include generate-columns("small");
+    }
+
+    @include for-medium {
+        @include generate-columns("medium");
+    }
+
+    @include for-large {
+        @include generate-columns("large");
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+
+        @include for-small {
+            width: 100%;
+            overflow: hidden; // Иначе появляется горизонтальная прокрутка
+        }
+        @include for-medium {
+            width: 90%;
+        }
+        @include for-large {
+            width: 90%;
+            max-width: 1280px;
+        }
+    }
+
+    // Отрицательный отступ https://medium.com/@justintulk/why-css-grid-frameworks-have-negative-margins-37d67cf6acc8
+    // Еще про отрицатильны марджин в сетках
+    // http://www.helloerik.com/the-subtle-magic-behind-why-the-bootstrap-3-grid-works
+    .row {
+        //position: relative;
+        //width: 100%;
+        margin-left: -$gutter;
+        margin-right: -$gutter;
+    }
+
+    .row [class^="col-"] {
+        float: left;
+        padding-right: $gutter;
+        padding-left: $gutter;
+    }
+
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .pull-right {
+        float: right !important;
+    }
+}

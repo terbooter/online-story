@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/all.min.css">
-</head>
-<body>
-<h1>Homepage</h1>
-</body>
-</html>
+<% include ./parts/header.ejs %>
+
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <% for(var i = 0; i < 0; i++){ %>
+            <div class="col-small-12 col-medium-6 col-large-4">
+                <% include ./parts/post-preview-item.ejs %>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<% include ./parts/footer.ejs %>

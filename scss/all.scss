@@ -1,4 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Lora');
+@import "lib/reset";
+@import "lib/grid";
+@import "helper";
+
+* {
+    font-family: Lora, serif;
+}
+
+$orange: #DDAD58;
+
+@include generate-grid-classes();
 body {
     color: grey;
     background: white;
+}
+
+.header {
+    text-align: center;
+    .logo {
+        color: #363F48;
+        font-weight: bold;
+        display: inline-block;
+        //@include font-size(3);
+        font-size: 50px;
+        @include padding-top(2);
+        @include padding-bottom(0.2);
+        //border: 1px solid red;
+        margin: 0 auto;
+    }
+    .slogan {
+        font-size: 10px;
+        font-weight: bold;
+        color: $orange;
+        @include padding-bottom(0.5);
+        letter-spacing: 1px;
+    }
+
+    hr {
+        width: 80px;
+        border: none; /* Убираем границу для браузера Firefox */
+        color: $orange; /* Цвет линии для остальных браузеров */
+        background-color: $orange; /* Цвет линии для браузера Firefox и Opera */
+        height: 1px; /* Толщина линии */
+        margin: 0 auto;
+        @include margin-bottom(2);
+    }
+}
+
+.row [class^="col-"] {
+    background: lightyellow;
+    border: 1px solid grey;
+}
+
+nav {
+
+    ul {
+        height: inherit;
+        display: inline-block;
+        list-style-type: none;
+        li {
+            float: left;
+
+            padding: 0 10px;
+            a {
+                color: #444;
+
+                &:hover {
+                    color: #DFBE95;
+                }
+            }
+        }
+
+        &:after {
+            display: table;
+            content: "";
+            clear: both;
+        }
+    }
+}
+
+.title {
+    /* чтобы линии не выходили за ширину блока заголовка */
+    overflow: hidden;
+}
+
+.title:before,
+.title:after {
+    content: '';
+
+    /* делаем линию строчно-блочной */
+    display: inline-block;
+
+    /* выравниваем вертикально по середине */
+    vertical-align: middle;
+
+    /* не позволяем ширине превысить 100% (будет добавлен бордюр) */
+    box-sizing: border-box;
+
+    /* установка ширины в 100% делает линию равной ширине тега заголовка
+    ** благодаря этому линия заполнит все свободное пространство
+    ** слева и справа от текста
+    */
+    width: 100%;
+    height: 2px;
+    background: #6CBD83;
+
+    /* добавляем к линии левый и правый бордюр цветом основного фона заголовка
+    ** благодаря этому создается нужный отступ между линиями и текстом
+    */
+    border: solid #FFF;
+    border-width: 0 10px;
+}
+
+.title:before {
+    /* смещаем левую линию влево отрицательным отступом, равным 100% ширины
+    ** благодаря этому линия встает слева от текста
+    */
+    margin-left: -100%;
+}
+
+.title:after {
+    /* смещаем правую линию вправо отрицательным отступом, равным 100% ширины
+    ** благодаря этому линия встает справа от текста
+    */
+    margin-right: -100%;
+}
+
+.main {
+    @include padding-top(2);
 }

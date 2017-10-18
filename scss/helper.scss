@@ -1,0 +1,157 @@
+@import "lib/grid";
+@import "lib/typography";
+
+// В этом хелпере собраны миксины,
+// которые генерируют размеры в
+// зависимости от базовой линии для
+// разных экранов
+//
+// Если нужно чтобы высота блока равнялась
+// одной базовой линии для всех экранов, то
+// @include height(1)
+
+@mixin height($lines) {
+    @include for-small {
+        height: space($lines, small);
+    }
+    @include for-medium {
+        height: space($lines, medium);
+    }
+    @include for-large {
+        height: space($lines, large);
+    }
+}
+
+@mixin font-size($level) {
+    @include for-small {
+        font-size: small-font-size($level);
+    }
+    @include for-medium {
+        font-size: medium-font-size($level);
+    }
+    @include for-large {
+        font-size: large-font-size($level);
+    }
+}
+
+@mixin line-height($lines) {
+    @include for-small {
+        line-height: space($lines, small);
+    }
+    @include for-medium {
+        line-height: space($lines, medium);
+    }
+    @include for-large {
+        line-height: space($lines, large);
+    }
+}
+
+@mixin padding-top($lines) {
+    @include for-small {
+        padding-top: space($lines, small);
+    }
+    @include for-medium {
+        padding-top: space($lines, medium);
+    }
+    @include for-large {
+        padding-top: space($lines, large);
+    }
+}
+
+@mixin padding-bottom($lines) {
+    @include for-small {
+        padding-bottom: space($lines, small);
+    }
+
+    @include for-medium {
+        padding-bottom: space($lines, medium);
+    }
+
+    @include for-large {
+        padding-bottom: space($lines, large);
+    }
+}
+
+@mixin padding-right($lines) {
+    @include for-small {
+        padding-right: space($lines, small);
+    }
+
+    @include for-medium {
+        padding-right: space($lines, medium);
+    }
+
+    @include for-large {
+        padding-right: space($lines, large);
+    }
+}
+
+@mixin margin-top($lines) {
+    @include for-small {
+        margin-top: space($lines, small);
+    }
+
+    @include for-medium {
+        margin-top: space($lines, medium);
+    }
+
+    @include for-large {
+        margin-top: space($lines, large);
+    }
+}
+
+@mixin margin-bottom($lines) {
+    @include for-small {
+        margin-bottom: space($lines, small);
+    }
+
+    @include for-medium {
+        margin-bottom: space($lines, medium);
+    }
+
+    @include for-large {
+        margin-bottom: space($lines, large);
+    }
+}
+
+@mixin margin-right($lines) {
+    @include for-small {
+        margin-right: space($lines, small);
+    }
+
+    @include for-medium {
+        margin-right: space($lines, medium);
+    }
+
+    @include for-large {
+        margin-right: space($lines, large);
+    }
+}
+
+@mixin margin-left($lines) {
+    @include for-small {
+        margin-left: space($lines, small);
+    }
+
+    @include for-medium {
+        margin-left: space($lines, medium);
+    }
+
+    @include for-large {
+        margin-left: space($lines, large);
+    }
+}
+
+@mixin margin($lines) {
+    @include for-small {
+        margin: space($lines, small);
+    }
+
+    @include for-medium {
+        margin: space($lines, medium);
+    }
+
+    @include for-large {
+        margin: space($lines, large);
+    }
+}

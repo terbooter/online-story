@@ -1,0 +1,65 @@
+// Основной размер шрифта от которого считаются rem-ы
+// Что такое REM читать тут https://habrahabr.ru/post/280125/
+$base-font-size: 16px;
+
+// Коэффициент базовой линии для разных media запросов
+$base-line-height: (
+        "small":1.5, //24px
+        "medium":1.75, //28px
+        "large":1.75
+);
+
+// 4 размера текста для заданного маленького экрана
+// маленький, основной, побольше и большой
+// подробнее тут https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm
+@function small-font-size($level) {
+    //multiplier
+    $k: 1.2;
+    @if $level==-1 {
+        @return 1/$k + 0rem;
+    }
+    @if $level==0 {
+        @return 1rem;
+    }
+    @if $level==1 {
+        @return 1*$k + 0rem;
+    }
+    @if $level==2 {
+        @return $k*$k + 0rem;
+    }
+    @if $level==3 {
+        @return $k*$k*$k + 0rem;
+    }
+}
+
+// То же что и small-font-size но для среднего экрана
+@function medium-font-size($level) {
+    //multiplier
+    $k: 1.333;
+    @if $level==-1 {
+        @return 1/$k + 0rem;
+    }
+    @if $level==0 {
+        @return 1rem;
+    }
+    @if $level==1 {
+        @return 1*$k + 0rem;
+    }
+    @if $level==2 {
+        @return $k*$k + 0rem;
+    }
+    @if $level==3 {
+        @return $k*$k*$k + 0rem;
+    }
+}
+
+// То же что и small-font-size но для большого экрана
+@function large-font-size($level) {
+    @return medium-font-size($level)
+}
+
+// $lines - количество линий горизонтальной сетки (вертикальный ритм)
+// lля размера экрана $screen
+@function space($lines, $screen) {
+    @return #{map-get($base-line-height, $screen)*$lines}rem;
+}
