@@ -15,6 +15,7 @@ ADD ./tsconfig.json /container/tsconfig.json
 ADD ./gulpfile.js /container/gulpfile.js
 ADD ./src /container/src
 ADD ./views /container/views
+ADD ./scss /container/scss
 
 RUN npm install
 
