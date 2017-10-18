@@ -53,11 +53,25 @@ body {
 }
 
 nav {
+    position: relative;
+
+    &:before {
+        position: absolute;
+        left: 0;
+        top: 45%;
+        content: "";
+
+        border-bottom: 1px dotted #DDBE86;
+        height: 0;
+        width: 100%;
+        z-index: -1;
+    }
 
     ul {
         height: inherit;
         display: inline-block;
         list-style-type: none;
+        background-color: white;
         li {
             float: left;
 
