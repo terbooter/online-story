@@ -148,3 +148,16 @@ nav {
         }
     }
 }
+
+footer {
+    margin-top: 40px;
+    background-color: black;
+    .footer-menu {
+        padding: 40px;
+        list-style-type: none;
+
+        a {
+            color: white;
+        }
+    }
+}
