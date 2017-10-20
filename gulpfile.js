@@ -33,10 +33,10 @@ gulp.task('sass', function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(cleanCSS(options))
         .pipe(rename("all.min.css"))
-        .pipe(gulp.dest('./public/css/'))
+        .pipe(gulp.dest('./css/'))
         .pipe(cleanCSS(options2))
         .pipe(rename("all.min.compressed.css"))
-        .pipe(gulp.dest('./public/css/'));
+        .pipe(gulp.dest('./css/'));
 });
 
 gulp.task('sass:watch', ["sass"], function () {

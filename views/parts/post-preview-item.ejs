@@ -1,19 +1,63 @@
-<% let url = "/blog/popular-discussion-topics-on-video-chat-sites" %>
+<%
+let item = {
+    url: "/blog/popular-discussion-topics-on-video-chat-sites",
+    img: "/img/4.jpg",
+    title: "Beauty undefined in Sunlight",
+    annotation: `Fly, air beast evening yielding you it seas Void above is let male.
+    Made lights bearing signs blessed sixth which after morning.
+    Image living were unto subdue fifth. Sixth sea behold unto subdue their seas`,
+    date: "February 18, 2014",
+    author: "By Ceyron Louis",
+    author_link: "https://plus.google.com/114804705990631494102",
+    category: "Extras",
+    category_url: "extras"
+}
+%>
 
 <section class="post-preview">
-    <a href="<%= url %>" class="title-wrapper">
-        <h2>Popular Discussion Topics on Blog Sites </h2>
+    <div class="header">
+        <div class="category">
+            In <a href="<%= item.category_url %>"><%= item.category %></a>
+        </div>
+        <h2><a href="<%= item.url %>"><%= item.title %></a></h2>
+        <div class="meta">
+            <div class="details">
+                <span class="author">
+                    By <a href="<%= item.title %>">Ceyron Louis</a>
+                </span>
+            </div>
+            <span class="date">
+                <%= item.date %>
+            </span>
+
+        </div>
+    </div>
+    <div class="image">
+        <a href="<%= item.url %>">
+            <img src="<%= item.img %>" alt="">
+        </a>
+    </div>
+    <div class="annotation"><%= item.annotation %></div>
+    <a class="read-more" href="<%= item.url %>">
+        READ MORE
     </a>
-    <a href="<%= url %>" class="img-wrapper">
-        <img src="/blog/img/3.jpg" alt="">
-    </a>
-    <p class="annotation">
-        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной
-        "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию
-        размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил
-        без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время
-        послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы
-        электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
-    </p>
-    <a href="<%= url %>" class="button1 read-more">READ MORE</a>
+    <div class="social-buttons">
+        <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
+            <a class="hi-icon"
+               href="https://www.facebook.com/sharer.php?u=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               target="_blank"><i class="fa fa-facebook"></i></a>
+            <a class="hi-icon"
+               href="https://twitter.com/share?url=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               target="_blank"><i class="fa fa-twitter"></i></a>
+            <a class="hi-icon"
+               href="https://plus.google.com/share?url=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               target="_blank"><i class="fa fa-google"></i></a>
+            <a class="hi-icon"
+               href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a class="hi-icon"
+               href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','https://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"
+               target="_blank"><i class="fa fa-pinterest"></i></a>
+        </div>
+    </div>
 </section>

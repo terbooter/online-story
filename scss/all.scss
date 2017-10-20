@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Lora');
+@import url('https://fonts.googleapis.com/css?family=Lato|Lora|Montserrat');
 @import "lib/reset";
 @import "lib/grid";
 @import "helper";
+@import "home";
 
 * {
     font-family: Lora, serif;
@@ -10,9 +11,13 @@
 $orange: #DDAD58;
 
 @include generate-grid-classes();
+
+.container {
+    max-width: 1150px;
+}
+
 body {
-    color: grey;
-    background: white;
+
 }
 
 .header {
@@ -48,8 +53,8 @@ body {
 }
 
 .row [class^="col-"] {
-    background: lightyellow;
-    border: 1px solid grey;
+    //background: lightyellow;
+    //border: 1px solid grey;
 }
 
 nav {
@@ -93,53 +98,53 @@ nav {
     }
 }
 
-.title {
-    /* чтобы линии не выходили за ширину блока заголовка */
-    overflow: hidden;
-}
-
-.title:before,
-.title:after {
-    content: '';
-
-    /* делаем линию строчно-блочной */
-    display: inline-block;
-
-    /* выравниваем вертикально по середине */
-    vertical-align: middle;
-
-    /* не позволяем ширине превысить 100% (будет добавлен бордюр) */
-    box-sizing: border-box;
-
-    /* установка ширины в 100% делает линию равной ширине тега заголовка
-    ** благодаря этому линия заполнит все свободное пространство
-    ** слева и справа от текста
-    */
-    width: 100%;
-    height: 2px;
-    background: #6CBD83;
-
-    /* добавляем к линии левый и правый бордюр цветом основного фона заголовка
-    ** благодаря этому создается нужный отступ между линиями и текстом
-    */
-    border: solid #FFF;
-    border-width: 0 10px;
-}
-
-.title:before {
-    /* смещаем левую линию влево отрицательным отступом, равным 100% ширины
-    ** благодаря этому линия встает слева от текста
-    */
-    margin-left: -100%;
-}
-
-.title:after {
-    /* смещаем правую линию вправо отрицательным отступом, равным 100% ширины
-    ** благодаря этому линия встает справа от текста
-    */
-    margin-right: -100%;
-}
-
-.main {
+.featured {
     @include padding-top(2);
+}
+
+.featured-item {
+    padding-bottom: 15px;
+    a.preview {
+        display: block;
+        height: 260px;
+
+        outline: 2px solid white;
+        outline-offset: -15px;
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .info {
+        text-align: center;
+        color: #6a6359;
+        font-size: 13px;
+        padding: 10px 0;
+        .category {
+            a {
+                color: inherit;
+
+                &:before, &:after {
+                    height: 1px;
+                    width: 15px;
+                    display: inline-block;
+                    content: '';
+                    background-color: #DDBE86;
+                    -webkit-transition: 300ms;
+                    -moz-transition: 300ms;
+                    -o-transition: 300ms;
+                    transition: 300ms;
+                    margin: 4px 5px;
+                }
+            }
+        }
+
+        .title {
+            padding: 5px 0;
+            a {
+                color: inherit;
+            }
+        }
+    }
 }

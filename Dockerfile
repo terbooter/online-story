@@ -11,15 +11,17 @@ RUN mkdir -p /container
 WORKDIR /container
 
 ADD ./package.json /container/package.json
+RUN npm install
+
 ADD ./tsconfig.json /container/tsconfig.json
 ADD ./gulpfile.js /container/gulpfile.js
 ADD ./src /container/src
 ADD ./views /container/views
 ADD ./scss /container/scss
+ADD ./public /container/public
 
-RUN npm install
-
-RUN gulp sass
+RUN mkdir -p /container/public/css
 RUN gulp tsc
+RUN gulp sass
 
 CMD ["node", "/container/bin/index.js"]

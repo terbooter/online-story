@@ -1,15 +1,42 @@
 <% include ./parts/header.ejs %>
 
-<div class="main">
+<section class="featured">
     <div class="container">
         <div class="row">
-            <% for(var i = 0; i < 0; i++){ %>
-            <div class="col-small-12 col-medium-6 col-large-4">
-                <% include ./parts/post-preview-item.ejs %>
+            <div class="col-small-12 col-medium-6 col-large-3 ">
+                <% let item = {src: "/img/1.jpg", title: "I ordered a dish and finally it arrived"} %>
+                <% include ./parts/featured-item.ejs %>
             </div>
-            <% } %>
+            <div class="col-small-12 col-medium-6 col-large-3 ">
+                <% item = {src: "/img/2.jpg", title: "I ordered a dish and finally it arrived"} %>
+                <% include ./parts/featured-item.ejs %>
+            </div>
+            <div class="col-small-12 col-medium-6 col-large-3 ">
+                <% item = {src: "/img/3.jpg", title: "I ordered a dish and finally it arrived"} %>
+                <% include ./parts/featured-item.ejs %>
+            </div>
+            <div class="col-small-12 col-medium-6 col-large-3 ">
+                <% item = {src: "/img/4.jpg", title: "I ordered a dish and finally it arrived"} %>
+                <% include ./parts/featured-item.ejs %>
+            </div>
         </div>
     </div>
-</div>
+</section>
+<section class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-small-12 col-medium-12 col-large-8">
+                <div class="row">
+                    <% for(var i = 0; i < 6; i++){ %>
+                    <div class="col-small-12 col-medium-6 col-large-6">
+                        <% include ./parts/post-preview-item.ejs %>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <% include ./parts/footer.ejs %>

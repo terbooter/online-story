@@ -2,5 +2,6 @@ help-files
 node_modules
 .idea
 bin
-public/css
+public
+css
 all.css
