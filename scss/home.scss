@@ -130,3 +130,42 @@
         }
     }
 }
+
+.about-author {
+    padding: 40px 20px 20px 40px;
+    h2 {
+
+        position: relative;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 75%;
+            left: 0;
+            width: 100%;
+            border-top: 1px solid #DDBE86;
+        }
+        margin-top: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 14px;
+        line-height: 17px;
+        padding-top: 20px;
+        background: rgba(255, 255, 255, 0.81);
+        text-align: center;
+    }
+    .img-wrapper {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        img {
+            width: 100%;
+        }
+    }
+
+    .text {
+        font-size: 15px;
+        color: #6a6359;
+        font-weight: 300;
+        line-height: 1.6;
+        text-align: justify;
+    }
+}
