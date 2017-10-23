@@ -1,0 +1,21 @@
+<section class="popular-posts">
+    <h2>POPULAR POSTS</h2>
+    <ul>
+        <% for(let popularPost of popularPosts){ %>
+        <li>
+            <div class="item">
+                <div class="thumbnail">
+                    <a href="<%= popularPost.url %>" target="_blank">
+                        <img alt="<%= popularPost.title %>" src="<%= popularPost.img %>">
+                    </a>
+                </div>
+                <div class="title">
+                    <a href="<%= popularPost.url %>">
+                        <%= popularPost.title %>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <% } %>
+    </ul>
+</section>

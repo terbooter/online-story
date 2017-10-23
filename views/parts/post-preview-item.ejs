@@ -1,6 +1,8 @@
 <%
+    /*
 let item = {
-    url: "/blog/popular-discussion-topics-on-video-chat-sites",
+//    url: "/blog/popular-discussion-topics-on-video-chat-sites",
+    url: "/post",
     img: "/img/4.jpg",
     title: "Beauty undefined in Sunlight",
     annotation: `Fly, air beast evening yielding you it seas Void above is let male.
@@ -12,6 +14,7 @@ let item = {
     category: "Extras",
     category_url: "extras"
 }
+*/
 %>
 
 <section class="post-preview">
@@ -27,7 +30,7 @@ let item = {
                 </span>
             </div>
             <span class="date">
-                <%= item.date %>
+                <%= item.getDateString() %>
             </span>
 
         </div>
@@ -44,20 +47,17 @@ let item = {
     <div class="social-buttons">
         <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
             <a class="hi-icon"
-               href="https://www.facebook.com/sharer.php?u=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               href=""
                target="_blank"><i class="fa fa-facebook"></i></a>
             <a class="hi-icon"
-               href="https://twitter.com/share?url=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               href=""
                target="_blank"><i class="fa fa-twitter"></i></a>
             <a class="hi-icon"
-               href="https://plus.google.com/share?url=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               href=""
                target="_blank"><i class="fa fa-google"></i></a>
             <a class="hi-icon"
-               href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://couture-oddthemes.blogspot.ru/2014/02/my-work-stuff-at-desk.html"
+               href=""
                target="_blank"><i class="fa fa-linkedin"></i></a>
-            <a class="hi-icon"
-               href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','https://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"
-               target="_blank"><i class="fa fa-pinterest"></i></a>
         </div>
     </div>
 </section>

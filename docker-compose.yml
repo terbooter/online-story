@@ -9,3 +9,6 @@ node:
   log_opt:
     max-size: "50m"
     max-file: "100"
+  environment:
+    - ADMIN_USER=test
+    - ADMIN_PASSWORD=test
