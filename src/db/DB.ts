@@ -22,7 +22,7 @@ export class DB {
         this.getAllPosts();
     }
 
-    public getPost(): Post {
+    public getPostOld(): Post {
         return new Post(Mock.postDB);
     }
 
@@ -35,6 +35,18 @@ export class DB {
                     resolve(posts.map((postDB: PostDB) => {
                         return new Post(postDB);
                     }));
+                }
+            });
+        }));
+    }
+
+    public async getPost(url: string): Promise<Post> {
+        return new Promise<Post>(((resolve, reject) => {
+            this.db.get("select * from posts where url = $url", { $url: url }, (err, postDB) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(new Post(postDB));
                 }
             });
         }));

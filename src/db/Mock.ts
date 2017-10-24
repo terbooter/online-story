@@ -1,7 +1,7 @@
 import { PostDB } from "./PostDB";
 export class Mock {
     public static postDB: PostDB = {
-        url: "/post",
+        url: "post",
         img: "/img/4.jpg",
         title: "Beauty undefined in Sunlight",
         annotation: `Fly, air beast evening yielding you it seas Void above is let male.
@@ -40,7 +40,7 @@ export class Mock {
     public static featuredPost1: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post1",
+        url: "post1",
         body: `
             <p>Some Text</p>
             [img]
@@ -59,7 +59,7 @@ export class Mock {
     public static featuredPost2: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post2",
+        url: "post2",
         body: `
             <p>Some Text</p>
             [img]
@@ -77,7 +77,7 @@ export class Mock {
     public static featuredPost3: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post3",
+        url: "post3",
         body: `
             <p>Some Text</p>
             [img]
@@ -96,7 +96,7 @@ export class Mock {
     public static featuredPost4: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post4",
+        url: "post4",
         body: `
             <p>Some Text</p>
             [img]

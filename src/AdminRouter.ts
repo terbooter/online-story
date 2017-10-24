@@ -5,6 +5,7 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as session from "express-session";
 import { SessionOptions } from "express-session";
+import { Post } from "./Post";
 
 export class AdminRouter {
     private router: express.Router;
@@ -42,8 +43,37 @@ export class AdminRouter {
                 });
         });
 
-        this.router.get("/add", (req, res) => res.render("admin/add"));
+        this.router.get("/add", this.getAdd.bind(this));
         this.router.post("/add", this.addPost.bind(this));
+        this.router.get("/edit/:url", this.editPost.bind(this));
+    }
+
+    private getAdd(req, res) {
+        let postDB: PostDB = {
+            url: "",
+            title: "",
+            isPublic: "",
+            annotation: "",
+            category: "",
+            author_link: "",
+            category_url: "",
+            author: "",
+            img: "",
+            body: "",
+            date: 0
+        };
+
+        let post = new Post(postDB);
+        res.render("admin/add", { post });
+    }
+
+    private editPost(req, res) {
+        let url = req.params.url;
+        this.db.getPost(url)
+            .then((post: Post) => {
+                console.log(post);
+                res.render("admin/edit", { post });
+            });
     }
 
     public addPost(req, res) {
