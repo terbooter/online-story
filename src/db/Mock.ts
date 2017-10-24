@@ -7,7 +7,8 @@ export class Mock {
         annotation: `Fly, air beast evening yielding you it seas Void above is let male.
     Made lights bearing signs blessed sixth which after morning.
     Image living were unto subdue fifth. Sixth sea behold unto subdue their seas`,
-        date: new Date(),
+        date: 0,
+        isPublic: "",
         author: "By Ceyron Louis",
         author_link: "https://plus.google.com/114804705990631494102",
         category: "Extras",
@@ -36,10 +37,10 @@ export class Mock {
 `
     };
 
-    public static  featuredPost1: PostDB = {
+    public static featuredPost1: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post",
+        url: "/post1",
         body: `
             <p>Some Text</p>
             [img]
@@ -47,7 +48,8 @@ export class Mock {
         `,
         author: "Bill",
         author_link: "/",
-        date: new Date(),
+        date: 0,
+        isPublic: "",
         img: "/img/1.jpg",
         category_url: "/",
         annotation: "some annotaion"
@@ -57,7 +59,7 @@ export class Mock {
     public static featuredPost2: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post",
+        url: "/post2",
         body: `
             <p>Some Text</p>
             [img]
@@ -65,7 +67,8 @@ export class Mock {
         `,
         author: "Bill",
         author_link: "/",
-        date: new Date(),
+        date: 0,
+        isPublic: "",
         img: "/img/2.jpg",
         category_url: "/",
         annotation: "some annotaion"
@@ -74,7 +77,7 @@ export class Mock {
     public static featuredPost3: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post",
+        url: "/post3",
         body: `
             <p>Some Text</p>
             [img]
@@ -82,7 +85,8 @@ export class Mock {
         `,
         author: "Bill",
         author_link: "/",
-        date: new Date(),
+        date: 0,
+        isPublic: "",
         img: "/img/3.jpg",
         category_url: "/",
         annotation: "some annotaion"
@@ -92,7 +96,7 @@ export class Mock {
     public static featuredPost4: PostDB = {
         title: "I ordered a dish and finally it arrived",
         category: "Sport",
-        url: "/post",
+        url: "/post4",
         body: `
             <p>Some Text</p>
             [img]
@@ -100,7 +104,8 @@ export class Mock {
         `,
         author: "Bill",
         author_link: "/",
-        date: new Date(),
+        date: 0,
+        isPublic: "",
         img: "/img/4.jpg",
         category_url: "/",
         annotation: "some annotaion"

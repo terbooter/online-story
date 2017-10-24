@@ -1,6 +1,8 @@
 <% include ./parts/header.ejs %>
 
-<a href="/admin/add" class="btn btn-primary">Добавить статью</a>
 <h1>Список статей:</h1>
 
+<% for(let post of posts){ %>
+<% include ./parts/post-preview.ejs %>
+<% } %>
 <% include ./parts/footer.ejs %>

@@ -1,7 +1,7 @@
 import { PostDB } from "./PostDB";
 
 import * as path from "path";
-import { Database } from "sqlite3";
+import { Database, Statement } from "sqlite3";
 import { EventEmitter } from "events";
 import { Mock } from "./Mock";
 import { Post } from "../Post";
@@ -18,10 +18,58 @@ export class DB {
         console.log(this.db);
 
         this.createTables();
+        this.insertMockPosts();
+        this.getAllPosts();
     }
 
     public getPost(): Post {
         return new Post(Mock.postDB);
+    }
+
+    public async getAllPosts(): Promise<PostDB[]> {
+        return new Promise<PostDB[]>(((resolve, reject) => {
+            // this.db.get("select * from posts where id=5", (err, row) => {
+            this.db.all("select * from posts", (err, posts) => {
+                console.log(err);
+                console.log(posts);
+                console.log("--------------------------------");
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(posts);
+                }
+            });
+        }));
+    }
+
+    public async putPost(post: PostDB) {
+        return new Promise<void>(((resolve, reject) => {
+            let sql = `
+                        insert into posts 
+                        (url, title, annotation, date, author, category, body, isPublic) 
+                        VALUES
+                        ($url, $title, $annotation, $date, $author, $category, $body, $isPublic);
+                        `;
+
+            let o = {
+                $url: post.url,
+                $title: post.title,
+                $annotation: post.annotation,
+                $date: post.date,
+                $author: post.author,
+                $category: post.category,
+                $body: post.body,
+                $isPublic: post.isPublic
+            };
+            this.db.run(sql, o, (err) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        }));
     }
 
     public getFeaturedPosts(): Post[] {
@@ -57,11 +105,18 @@ export class DB {
             "author"	TEXT,
             "category"	TEXT,
             "body"	TEXT,
-            "public"	INTEGER
+            "isPublic"	TEXT
             );`;
         this.db.exec(sql, (err) => {
             console.log(err);
         });
+    }
 
+    private insertMockPosts() {
+        this.putPost(Mock.postDB);
+        this.putPost(Mock.featuredPost1);
+        this.putPost(Mock.featuredPost2);
+        this.putPost(Mock.featuredPost3);
+        this.putPost(Mock.featuredPost4);
     }
 }

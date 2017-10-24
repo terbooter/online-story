@@ -1,8 +1,8 @@
 import * as express from "express";
-import { DB } from "./DB";
 import { AdminRouter } from "./AdminRouter";
 import { Post } from "./Post";
 import { basicAuth } from "./basicAuth";
+import { DB } from "./db/DB";
 
 export class WebServer {
     constructor(private db: DB) {
