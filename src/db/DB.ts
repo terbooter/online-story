@@ -26,17 +26,15 @@ export class DB {
         return new Post(Mock.postDB);
     }
 
-    public async getAllPosts(): Promise<PostDB[]> {
-        return new Promise<PostDB[]>(((resolve, reject) => {
-            // this.db.get("select * from posts where id=5", (err, row) => {
+    public async getAllPosts(): Promise<Post[]> {
+        return new Promise<Post[]>(((resolve, reject) => {
             this.db.all("select * from posts", (err, posts) => {
-                console.log(err);
-                console.log(posts);
-                console.log("--------------------------------");
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(posts);
+                    resolve(posts.map((postDB: PostDB) => {
+                        return new Post(postDB);
+                    }));
                 }
             });
         }));

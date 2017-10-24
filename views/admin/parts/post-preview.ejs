@@ -1,8 +1,14 @@
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title"><%= post.title %></h4>
-        <p class="card-text"><%= post.annotation %></p>
-        <a href="#" class="btn btn-primary">Редактировать</a>
-        <a href="#" class="btn btn-danger">Удалить</a>
+<section class="post-preview">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"><%= post.title %>
+                <% if(!post.getIsPublic()) { %>
+                <span class="badge badge-secondary">Черновик</span>
+                <% } %>
+            </h4>
+            <p class="card-text"><%= post.annotation %></p>
+            <a href="#" class="btn btn-primary">Редактировать</a>
+            <a href="#" class="btn btn-danger">Удалить</a>
+        </div>
     </div>
-</div>
+</section>

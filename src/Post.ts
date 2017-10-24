@@ -1,12 +1,14 @@
-import { PostDB } from "./PostDB";
+import { PostDB } from "./db/PostDB";
+
 export class Post implements PostDB {
+    date: number;
+    isPublic: string;
 
     body: string;
     url: string;
     img: string;
     title: string;
     annotation: string;
-    date: Date;
     author: string;
     author_link: string;
     category: string;
@@ -26,7 +28,16 @@ export class Post implements PostDB {
         return string.replace("[img]", img);
     }
 
+    public getIsPublic(): boolean {
+        if (this.isPublic === "on") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public getDateString(): string {
+        let date = new Date(Number(this.date));
         let monthNames = [
             "January", "February", "March",
             "April", "May", "June", "July",
@@ -34,9 +45,9 @@ export class Post implements PostDB {
             "November", "December"
         ];
 
-        let day = this.date.getDate();
-        let monthIndex = this.date.getMonth();
-        let year = this.date.getFullYear();
+        let day = date.getDate();
+        let monthIndex = date.getMonth();
+        let year = date.getFullYear();
 
         return day + ' ' + monthNames[monthIndex] + ' ' + year;
     }
