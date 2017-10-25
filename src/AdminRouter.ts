@@ -4,6 +4,7 @@ import { PostDB } from "./db/PostDB";
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as session from "express-session";
+import { basicAuth } from "./basicAuth";
 import { SessionOptions } from "express-session";
 import { Post } from "./Post";
 
@@ -13,6 +14,7 @@ export class AdminRouter {
     constructor(private db: DB) {
         this.router = express.Router();
 
+        this.router.use(basicAuth);
         this.router.use(cookieParser("secret"));
         this.router.use(bodyParser.urlencoded({ extended: false }));
         let sessionStore = new session.MemoryStore;

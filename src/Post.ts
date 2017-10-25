@@ -24,8 +24,12 @@ export class Post implements PostDB {
     }
 
     private parseBody(string: string): string {
-        let img = `<img src="${this.img}" alt="${this.title}">`;
-        return string.replace("[img]", img);
+        if (this.img) {
+            let img = `<img src="${this.img}" alt="${this.title}">`;
+            return string.replace("[img]", img);
+        } else {
+            return string.replace("[img]", "");
+        }
     }
 
     public getIsPublic(): boolean {

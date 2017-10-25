@@ -13,9 +13,7 @@ export class DB {
 
     constructor() {
         let file = path.resolve(__dirname + "../../../files/blog.sqlite");
-        console.log(file);
         this.db = new sqlite3.Database(file);
-        console.log(this.db);
 
         this.createTables();
         this.insertMockPosts();
@@ -56,13 +54,14 @@ export class DB {
         return new Promise<void>(((resolve, reject) => {
             let sql = `
                         insert into posts 
-                        (url, title, annotation, date, author, category, body, isPublic) 
+                        (url, img, title, annotation, date, author, category, body, isPublic) 
                         VALUES
-                        ($url, $title, $annotation, $date, $author, $category, $body, $isPublic);
+                        ($url, $img, $title, $annotation, $date, $author, $category, $body, $isPublic);
                         `;
 
             let o = {
                 $url: post.url,
+                $img: post.img,
                 $title: post.title,
                 $annotation: post.annotation,
                 $date: post.date,
@@ -73,7 +72,6 @@ export class DB {
             };
             this.db.run(sql, o, (err) => {
                 if (err) {
-                    console.log(err);
                     reject(err);
                 } else {
                     resolve();
@@ -109,6 +107,7 @@ export class DB {
             `CREATE TABLE "posts" (
             "id"	INTEGER PRIMARY KEY AUTOINCREMENT,
             "url"	TEXT UNIQUE,
+            "img"	TEXT,
             "title"	TEXT,
             "annotation"	TEXT,
             "date"	INTEGER,
@@ -118,15 +117,19 @@ export class DB {
             "isPublic"	TEXT
             );`;
         this.db.exec(sql, (err) => {
-            console.log(err);
+            // console.log(err);
         });
     }
 
-    private insertMockPosts() {
-        this.putPost(Mock.postDB);
-        this.putPost(Mock.featuredPost1);
-        this.putPost(Mock.featuredPost2);
-        this.putPost(Mock.featuredPost3);
-        this.putPost(Mock.featuredPost4);
+    private async insertMockPosts() {
+        try {
+            await this.putPost(Mock.postDB);
+            await this.putPost(Mock.featuredPost1);
+            await this.putPost(Mock.featuredPost2);
+            await this.putPost(Mock.featuredPost3);
+            await this.putPost(Mock.featuredPost4);
+        } catch (err) {
+
+        }
     }
 }

@@ -1,8 +1,7 @@
 import * as express from "express";
 import { AdminRouter } from "./AdminRouter";
-import { Post } from "./Post";
-import { basicAuth } from "./basicAuth";
 import { DB } from "./db/DB";
+import { BlogRouter } from "./BlogRouter";
 
 export class WebServer {
     constructor(private db: DB) {
@@ -13,27 +12,9 @@ export class WebServer {
         app.use(express.static("public"));
         app.use(express.static("css"));
 
-        app.listen(99);
-
-        app.use((req, res, next) => {
-            res.locals.popularPosts = this.db.getPopularPosts();
-            next();
-        });
-
-        app.get("/", (req, res) => {
-            let posts: Post[] = [];
-            posts.push(this.db.getPost());
-            posts.push(this.db.getPost());
-            posts.push(this.db.getPost());
-            posts.push(this.db.getPost());
-            res.render("home", { posts, featuredPosts: this.db.getFeaturedPosts() });
-        });
-
-        app.get("/post", (req, res) => {
-            res.render("post", { post: this.db.getPost() });
-        });
-
-        app.use(basicAuth);
         app.use("/admin", new AdminRouter(this.db).getRouter());
+        app.use("/", new BlogRouter(this.db).getRouter());
+
+        app.listen(99);
     }
 }
