@@ -54,24 +54,7 @@ export class AdminRouter {
     private post_edit(req, res, next) {
         let url = req.params.url;
 
-        console.log(req.body);
-
-        let b = req.body;
-
-        let post: PostDB = {
-            id: parseInt(b.id),
-            url: b.url,
-            title: b.title,
-            isPublic: b.isPublic,
-            annotation: "",
-            category: "",
-            author_link: "",
-            category_url: "",
-            author: "",
-            img: "",
-            body: b.body.trim(),
-            date: 0
-        };
+        let post: PostDB = this.parseFormData(req.body);
 
         this.db.updatePost(post.id as number, post)
             .then(() => {
@@ -120,21 +103,8 @@ export class AdminRouter {
     }
 
     public post_add(req, res) {
-        console.log(req.body);
-        let b = req.body;
-        let postDB: PostDB = {
-            url: b.url,
-            title: b.title,
-            isPublic: b.isPublic,
-            body: b.body,
-            date: Date.now(),
-            img: "",
-            author: "",
-            category_url: "",
-            author_link: "",
-            category: "",
-            annotation: "annotation"
-        };
+
+        let postDB: PostDB = this.parseFormData(req.body);
 
         this.db.putPost(postDB)
             .then(() => {
@@ -151,6 +121,26 @@ export class AdminRouter {
                 };
                 res.redirect("add");
             });
+    }
+
+    private parseFormData(b): PostDB {
+
+        let post: PostDB = {
+            id: parseInt(b.id),
+            url: b.url,
+            title: b.title,
+            isPublic: b.isPublic,
+            annotation: "",
+            category: "",
+            author_link: "",
+            category_url: "",
+            author: "",
+            img: "",
+            body: b.body.trim(),
+            date: 0
+        };
+
+        return post;
     }
 
     public getRouter(): express.Router {
