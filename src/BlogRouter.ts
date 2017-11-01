@@ -25,13 +25,6 @@ export class BlogRouter {
     private getPost(req, res, next) {
         let url = req.params.url;
 
-        //TODO fix bad img src
-        if (url == "undefined") {
-            next();
-            return;
-        }
-        console.log("URL=" + url);
-
         this.db.getPost(url)
             .then((post: Post | null) => {
                 if (post == null) {
