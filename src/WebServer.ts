@@ -10,6 +10,7 @@ export class WebServer {
         app.set("view engine", "ejs");
         app.set("views", "views");
         app.use(express.static("public"));
+        app.use(express.static("static/favicon"));
         app.use(express.static("css"));
 
         app.use("/admin", new AdminRouter(this.db).getRouter());
