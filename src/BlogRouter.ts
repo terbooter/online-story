@@ -27,13 +27,18 @@ export class BlogRouter {
 
         //TODO fix bad img src
         if (url == "undefined") {
+            next();
             return;
         }
         console.log("URL=" + url);
 
         this.db.getPost(url)
-            .then((post: Post) => {
-                res.render("post", { post });
+            .then((post: Post | null) => {
+                if (post == null) {
+                    next();
+                } else {
+                    res.render("post", { post });
+                }
             })
             .catch((err) => {
                 next(err);

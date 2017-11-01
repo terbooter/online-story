@@ -38,13 +38,19 @@ export class DB {
         }));
     }
 
-    public async getPost(url: string): Promise<Post> {
-        return new Promise<Post>(((resolve, reject) => {
+    public async getPost(url: string): Promise<Post | null> {
+        return new Promise<Post | null>(((resolve, reject) => {
             this.db.get("select * from posts where url = $url", { $url: url }, (err, postDB) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(new Post(postDB));
+                    console.log(postDB);
+                    if (!postDB) {
+                        resolve(null);
+                    } else {
+                        resolve(new Post(postDB));
+                    }
+
                 }
             });
         }));
