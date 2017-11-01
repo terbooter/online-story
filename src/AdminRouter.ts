@@ -45,12 +45,49 @@ export class AdminRouter {
                 });
         });
 
-        this.router.get("/add", this.getAdd.bind(this));
-        this.router.post("/add", this.addPost.bind(this));
-        this.router.get("/edit/:url", this.editPost.bind(this));
+        this.router.get("/add", this.get_add.bind(this));
+        this.router.post("/add", this.post_add.bind(this));
+        this.router.get("/edit/:url", this.get_edit.bind(this));
+        this.router.post("/edit/:url", this.post_edit.bind(this));
     }
 
-    private getAdd(req, res) {
+    private post_edit(req, res, next) {
+        let url = req.params.url;
+
+        console.log(req.body);
+
+        let b = req.body;
+
+        let post: PostDB = {
+            id: parseInt(b.id),
+            url: b.url,
+            title: b.title,
+            isPublic: b.isPublic,
+            annotation: "",
+            category: "",
+            author_link: "",
+            category_url: "",
+            author: "",
+            img: "",
+            body: b.body.trim(),
+            date: 0
+        };
+
+        this.db.updatePost(post.id as number, post)
+            .then(() => {
+                req.session.sessionFlash = {
+                    type: "alert-success",
+                    message: "Сохранено"
+                };
+                res.redirect("/admin/edit/" + url);
+            })
+            .catch((err) => {
+                next(err);
+            });
+
+    }
+
+    private get_add(req, res) {
         let postDB: PostDB = {
             url: "",
             title: "",
@@ -69,16 +106,20 @@ export class AdminRouter {
         res.render("admin/add", { post });
     }
 
-    private editPost(req, res) {
+    private get_edit(req, res, next) {
         let url = req.params.url;
         this.db.getPost(url)
-            .then((post: Post) => {
+            .then((post: Post | null) => {
                 console.log(post);
-                res.render("admin/edit", { post });
+                if (post == null) {
+                    next();
+                } else {
+                    res.render("admin/edit", { post });
+                }
             });
     }
 
-    public addPost(req, res) {
+    public post_add(req, res) {
         console.log(req.body);
         let b = req.body;
         let postDB: PostDB = {

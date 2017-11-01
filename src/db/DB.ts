@@ -56,6 +56,42 @@ export class DB {
         }));
     }
 
+    public async updatePost(id: number, post: PostDB): Promise<void> {
+        return new Promise<void>(((resolve, reject) => {
+            let sql = `update posts set url=$url, 
+            img=$img, 
+            title=$title, 
+            annotation=$annotation, 
+            date=$date,
+            author=$author,
+            category=$category,
+            body=$body,
+            isPublic=$isPublic
+            where id=$id`;
+
+            let o = {
+                $id: id,
+                $url: post.url,
+                $img: post.img,
+                $title: post.title,
+                $annotation: post.annotation,
+                $date: post.date,
+                $author: post.author,
+                $category: post.category,
+                $body: post.body,
+                $isPublic: post.isPublic
+            };
+
+            this.db.run(sql, o, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        }));
+    }
+
     public async putPost(post: PostDB) {
         return new Promise<void>(((resolve, reject) => {
             let sql = `
