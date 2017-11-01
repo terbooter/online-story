@@ -76,14 +76,16 @@ export class AdminRouter {
             })
     }
 
-    private get_settings(req, res, next) {
-        this.db.getAllPosts()
-            .then((posts: Post[]) => {
-                res.render("admin/settings", { posts });
-            })
-            .catch((err) => {
-                next(err);
-            });
+    private async get_settings(req, res, next) {
+
+        try {
+            let posts: Post[] = await this.db.getAllPosts();
+            let settings: SettingsDB = await this.db.getSettings();
+            console.log(settings);
+            res.render("admin/settings", { posts, settings });
+        } catch (err) {
+            next(err);
+        }
     }
 
     private post_edit(req, res, next) {

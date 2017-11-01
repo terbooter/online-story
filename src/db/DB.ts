@@ -142,6 +142,19 @@ export class DB {
         ]
     }
 
+    public getSettings(): Promise<SettingsDB> {
+        return new Promise<SettingsDB>(((resolve, reject) => {
+            let sql = `SELECT * FROM settings WHERE id=0`;
+            this.db.get(sql, (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        }));
+    }
+
     public updateSettings(settings: SettingsDB): Promise<void> {
         return new Promise<void>(((resolve, reject) => {
             let sql = `INSERT OR REPLACE into settings
