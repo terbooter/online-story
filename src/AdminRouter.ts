@@ -7,6 +7,7 @@ import * as session from "express-session";
 import { basicAuth } from "./basicAuth";
 import { SessionOptions } from "express-session";
 import { Post } from "./Post";
+import { SettingsDB } from "./db/SettingsDB";
 
 export class AdminRouter {
     private router: express.Router;
@@ -49,6 +50,40 @@ export class AdminRouter {
         this.router.post("/add", this.post_add.bind(this));
         this.router.get("/edit/:url", this.get_edit.bind(this));
         this.router.post("/edit/:url", this.post_edit.bind(this));
+        this.router.get("/settings", this.get_settings.bind(this));
+        this.router.post("/settings", this.post_settings.bind(this));
+    }
+
+    private post_settings(req, res, next) {
+        let b = req.body;
+        console.log("b=");
+        console.log(b);
+        console.log("b.featured_1=" + b.featured_1);
+        let settingsDB: SettingsDB = {
+            featured_1: parseInt(b.featured_1),
+            featured_2: parseInt(b.featured_2),
+            featured_3: parseInt(b.featured_3),
+            featured_4: parseInt(b.featured_4)
+        };
+        console.log(settingsDB);
+        this.db.updateSettings(settingsDB)
+            .then(() => {
+                req.session.sessionFlash = {
+                    type: "alert-success",
+                    message: "Сохранено"
+                };
+                res.redirect("/admin/settings/");
+            })
+    }
+
+    private get_settings(req, res, next) {
+        this.db.getAllPosts()
+            .then((posts: Post[]) => {
+                res.render("admin/settings", { posts });
+            })
+            .catch((err) => {
+                next(err);
+            });
     }
 
     private post_edit(req, res, next) {

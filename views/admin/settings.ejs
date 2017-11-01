@@ -1,0 +1,24 @@
+<% include ./parts/header.ejs %>
+
+<h1>Настройки:</h1>
+
+<form action="" method="post">
+
+    <% for(let blockId = 1;blockId <= 4; blockId++) { %>
+    <div class="form-group">
+        <label for="<%= blockId %>">
+            Избранная статья <%= blockId %>
+        </label>
+        <select name="featured_<%= blockId %>" id="<%= blockId %>">
+            <option value="-1">Not selected</option>
+            <% for (let post of posts) { %>
+            <option value="<%= post.id %>"><%= post.title %></option>
+            <% } %>
+        </select>
+    </div>
+    <% } %>
+
+    <input type="submit">
+</form>
+
+<% include ./parts/footer.ejs %>

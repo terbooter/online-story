@@ -5,6 +5,8 @@ import { Database, Statement } from "sqlite3";
 import { EventEmitter } from "events";
 import { Mock } from "./Mock";
 import { Post } from "../Post";
+import { SettingsDB } from "./SettingsDB";
+import { error } from "util";
 let sqlite3 = require("sqlite3").verbose();
 
 export class DB {
@@ -140,13 +142,37 @@ export class DB {
         ]
     }
 
+    public updateSettings(settings: SettingsDB): Promise<void> {
+        return new Promise<void>(((resolve, reject) => {
+            let sql = `INSERT OR REPLACE into settings
+            (id, featured_1, featured_2, featured_3, featured_4)
+            values
+            (0, $featured_1, $featured_2, $featured_3, $featured_4)`;
+
+            let o = {
+                $featured_1: settings.featured_1,
+                $featured_2: settings.featured_2,
+                $featured_3: settings.featured_3,
+                $featured_4: settings.featured_4,
+            };
+            this.db.run(sql, o, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        }));
+    }
+
     private createTables() {
         this.createPosts();
+        this.createSettings();
     }
 
     private createPosts() {
         let sql =
-            `CREATE TABLE "posts" (
+            `CREATE TABLE IF NOT EXISTS "posts" (
             "id"	INTEGER PRIMARY KEY AUTOINCREMENT,
             "url"	TEXT UNIQUE,
             "img"	TEXT,
@@ -160,6 +186,20 @@ export class DB {
             );`;
         this.db.exec(sql, (err) => {
             // console.log(err);
+        });
+    }
+
+    private createSettings() {
+        let sql =
+            `CREATE TABLE IF NOT EXISTS "settings" (
+	        "id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	        "featured_1"	INTEGER,
+	        "featured_2"	INTEGER,
+	        "featured_3"	INTEGER,
+	        "featured_4"	INTEGER
+	        );`;
+        this.db.exec(sql, (err) => {
+            console.log(err);
         });
     }
 
