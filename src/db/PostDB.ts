@@ -10,5 +10,6 @@ export interface PostDB {
     category: string; //"Extras",
     category_url: string // "extras"
     body: string;
-    isPublic: string
+    isPublic: string;
+    featured: string;
 }

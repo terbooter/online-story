@@ -112,6 +112,7 @@ export class AdminRouter {
             url: "",
             title: "",
             isPublic: "",
+            featured: "",
             annotation: "",
             category: "",
             author_link: "",
@@ -167,12 +168,13 @@ export class AdminRouter {
             url: b.url,
             title: b.title,
             isPublic: b.isPublic,
+            featured: b.featured,
             annotation: "",
-            category: "",
+            category: b.category,
             author_link: "",
             category_url: "",
             author: "",
-            img: "",
+            img: b.img,
             body: b.body.trim(),
             date: 0
         };

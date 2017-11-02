@@ -3,22 +3,16 @@
 <section class="featured">
     <div class="container">
         <div class="row">
+            <%
+            let item;
+            for(let index = 0; index < 4; index++){
+            if (featuredPosts[index]) {
+                item = featuredPosts[index];
+            %>
             <div class="col-small-12 col-medium-6 col-large-3 ">
-                <% let item = featuredPosts[0] %>
                 <%- include ./parts/featured-item.ejs %>
             </div>
-            <div class="col-small-12 col-medium-6 col-large-3 ">
-                <% item = featuredPosts[1] %>
-                <% include ./parts/featured-item.ejs %>
-            </div>
-            <div class="col-small-12 col-medium-6 col-large-3 ">
-                <% item = featuredPosts[2] %>
-                <% include ./parts/featured-item.ejs %>
-            </div>
-            <div class="col-small-12 col-medium-6 col-large-3 ">
-                <% item = featuredPosts[3] %>
-                <% include ./parts/featured-item.ejs %>
-            </div>
+            <% }} %>
         </div>
     </div>
 </section>
@@ -60,7 +54,7 @@
                             засыпал ей утром постель.
                         </div>
                     </section>
-                    <% include ./parts/popular-posts.ejs%>
+                    <% include ./parts/popular-posts.ejs %>
                 </aside>
             </div>
         </div>

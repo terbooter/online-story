@@ -19,7 +19,7 @@ export class BlogRouter {
     }
 
     private async getIndex(req, res) {
-        res.render("home", { posts: await this.db.getAllPosts(), featuredPosts: this.db.getFeaturedPosts() });
+        res.render("home", { posts: await this.db.getAllPosts(), featuredPosts: await this.db.getFeaturedPosts() });
     }
 
     private getPost(req, res, next) {

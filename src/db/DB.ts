@@ -1,12 +1,10 @@
 import { PostDB } from "./PostDB";
 
 import * as path from "path";
-import { Database, Statement } from "sqlite3";
-import { EventEmitter } from "events";
+import { Database } from "sqlite3";
 import { Mock } from "./Mock";
 import { Post } from "../Post";
 import { SettingsDB } from "./SettingsDB";
-import { error } from "util";
 let sqlite3 = require("sqlite3").verbose();
 
 export class DB {
@@ -68,7 +66,8 @@ export class DB {
             author=$author,
             category=$category,
             body=$body,
-            isPublic=$isPublic
+            isPublic=$isPublic,
+            featured=$featured
             where id=$id`;
 
             let o = {
@@ -81,7 +80,8 @@ export class DB {
                 $author: post.author,
                 $category: post.category,
                 $body: post.body,
-                $isPublic: post.isPublic
+                $isPublic: post.isPublic,
+                $featured: post.featured
             };
 
             this.db.run(sql, o, (err) => {
@@ -98,9 +98,9 @@ export class DB {
         return new Promise<void>(((resolve, reject) => {
             let sql = `
                         insert into posts 
-                        (url, img, title, annotation, date, author, category, body, isPublic) 
+                        (url, img, title, annotation, date, author, category, body, isPublic, featured) 
                         VALUES
-                        ($url, $img, $title, $annotation, $date, $author, $category, $body, $isPublic);
+                        ($url, $img, $title, $annotation, $date, $author, $category, $body, $isPublic, $featured);
                         `;
 
             let o = {
@@ -112,7 +112,8 @@ export class DB {
                 $author: post.author,
                 $category: post.category,
                 $body: post.body,
-                $isPublic: post.isPublic
+                $isPublic: post.isPublic,
+                $featured: post.featured,
             };
             this.db.run(sql, o, (err) => {
                 if (err) {
@@ -124,13 +125,26 @@ export class DB {
         }));
     }
 
-    public getFeaturedPosts(): Post[] {
-        return [
-            new Post(Mock.featuredPost1),
-            new Post(Mock.featuredPost2),
-            new Post(Mock.featuredPost3),
-            new Post(Mock.featuredPost4),
-        ]
+    public async getFeaturedPosts(): Promise<Post[]> {
+        return new Promise<Post[]>(((resolve, reject) => {
+            let sql = "select * from posts where featured='on'";
+            this.db.all(sql, (err, rows) => {
+                console.log("rows=");
+                console.log(rows);
+                if (err) {
+                    reject(err);
+                } else {
+                    if (!rows) {
+                        resolve([]);
+                    } else {
+                        let posts = rows.map((row) => {
+                            return new Post(row)
+                        });
+                        resolve(posts);
+                    }
+                }
+            });
+        }));
     }
 
     public getPopularPosts(): Post[] {
@@ -195,7 +209,8 @@ export class DB {
             "author"	TEXT,
             "category"	TEXT,
             "body"	TEXT,
-            "isPublic"	TEXT
+            "isPublic"	TEXT,
+            "featured" TEXT
             );`;
         this.db.exec(sql, (err) => {
             // console.log(err);
