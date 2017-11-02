@@ -18,7 +18,6 @@ ADD ./gulpfile.js /container/gulpfile.js
 ADD ./src /container/src
 ADD ./views /container/views
 ADD ./scss /container/scss
-ADD ./public /container/public
 ADD ./static /container/static
 
 RUN mkdir -p /container/public/css

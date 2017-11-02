@@ -4,7 +4,6 @@ node:
     - "99:99"
   volumes:
     - ./files:/container/files
-    - ./public:/container/public
   log_driver: "json-file"
   log_opt:
     max-size: "50m"

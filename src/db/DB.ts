@@ -16,8 +16,8 @@ export class DB {
         this.db = new sqlite3.Database(file);
 
         this.createTables();
-        this.insertMockPosts();
-        this.getAllPosts();
+        // this.insertMockPosts();
+        // this.getAllPosts();
     }
 
     public getPostOld(): Post {
@@ -149,10 +149,10 @@ export class DB {
 
     public getPopularPosts(): Post[] {
         return [
-            new Post(Mock.featuredPost1),
-            new Post(Mock.featuredPost2),
-            new Post(Mock.featuredPost3),
-            new Post(Mock.featuredPost4),
+            // new Post(Mock.featuredPost1),
+            // new Post(Mock.featuredPost2),
+            // new Post(Mock.featuredPost3),
+            // new Post(Mock.featuredPost4),
         ]
     }
 
