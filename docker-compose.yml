@@ -1,4 +1,5 @@
 node:
+  container_name: "online-story"
   build: .
   ports:
     - "99:99"
